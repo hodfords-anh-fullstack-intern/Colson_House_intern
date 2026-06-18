@@ -199,7 +199,34 @@ For the backend to convert uploaded room images into `.avif` format automaticall
    extension=gd
    ```
 4. Save the file and **restart your Apache server** in XAMPP.
-5. Verification: Run `php -r "var_dump(function_exists('imageavif'));"` in the terminal. It should return `bool(true)`.
+
+### 3. Git Permission Denied (403) / Wrong Account Error
+This occurs when local Git attempts to push using cached credentials from an old or incorrect GitHub account, leading to a permission error like:
+`remote: Permission to hodfords-anh-fullstack-intern/Colson_House_intern.git denied to <old-username>.`
+
+#### How to fix:
+1. **Check current Remote URL**:
+   ```bash
+   git remote -v
+   ```
+2. **Correct the Remote URL** (if pointing to the wrong repository):
+   ```bash
+   git remote set-url origin https://github.com/hodfords-anh-fullstack-intern/Colson_House_intern.git
+   ```
+3. **Clear Stored Credentials**:
+   - **Windows**:
+     1. Open **Credential Manager** from the Start Menu.
+     2. Select **Windows Credentials**.
+     3. Scroll down to **Generic Credentials**, find **`git:https://github.com`**, and click **Remove**.
+   - **macOS**:
+     1. Open **Keychain Access**.
+     2. Search for `github.com`.
+     3. Right-click and delete the key entries.
+4. **Push & Log In Again**:
+   Run the push command, and Git will prompt you to authenticate with your browser. Log in with the correct account:
+   ```bash
+   git push -u origin develop
+   ```
 
 ---
 
