@@ -15,11 +15,6 @@ class Room extends Model
         'name',
         'slug',
         'description',
-        'capacity',
-        'price_per_night',
-        'bed_type',
-        'room_size',
-        'has_ensuite_bathroom',
         'is_available'
     ];
 

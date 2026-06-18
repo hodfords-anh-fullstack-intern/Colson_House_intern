@@ -18,11 +18,6 @@ const MOCK_ROOMS = [
     name: 'Room 1, Deluxe Double Room',
     slug: 'room-1-deluxe-double-room',
     description: 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV. The unit offers 1 bed.',
-    capacity: 2,
-    price_per_night: 140.00,
-    bed_type: 'Double Bed',
-    room_size: 22,
-    has_ensuite_bathroom: true,
     images: [
       { image_url: 'http://localhost:8000/storage/rooms/room 1/room1.webp' },
       { image_url: 'http://localhost:8000/storage/rooms/room 1/room1_1.webp' },
@@ -44,11 +39,6 @@ const MOCK_ROOMS = [
     name: 'Room 2, Four Poster Room',
     slug: 'room-2-four-poster-room',
     description: 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers a four poster bed.',
-    capacity: 2,
-    price_per_night: 155.00,
-    bed_type: 'Four Poster Bed',
-    room_size: 24,
-    has_ensuite_bathroom: true,
     images: [
       { image_url: 'http://localhost:8000/storage/rooms/room2/room2.webp' },
       { image_url: 'http://localhost:8000/storage/rooms/room2/room2_1.webp' },
@@ -69,11 +59,6 @@ const MOCK_ROOMS = [
     name: 'Room 3, Standard Double',
     slug: 'room-3-standard-double',
     description: 'Featuring free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room has a wardrobe, an electric kettle, flat-screen TV, as well as chocolate for guests. The unit has 1 bed.',
-    capacity: 2,
-    price_per_night: 110.00,
-    bed_type: 'Double Bed',
-    room_size: 18,
-    has_ensuite_bathroom: true,
     images: [
       { image_url: 'http://localhost:8000/storage/rooms/room 3/room3.webp' },
       { image_url: 'http://localhost:8000/storage/rooms/room 3/room3_1.webp' },
@@ -94,11 +79,6 @@ const MOCK_ROOMS = [
     name: 'Room 4, Deluxe Balcony Room',
     slug: 'room-4-deluxe-balcony-room',
     description: 'This double room provides a fireplace. A seating area with a flat-screen TV, a desk, a balcony and a private bathroom are provided in this double room. The unit offers 1 bed.',
-    capacity: 2,
-    price_per_night: 165.00,
-    bed_type: 'Double Bed',
-    room_size: 26,
-    has_ensuite_bathroom: true,
     images: [
       { image_url: 'http://localhost:8000/storage/rooms/room 4/room4.webp' },
       { image_url: 'http://localhost:8000/storage/rooms/room 4/room4_1.webp' },
@@ -119,11 +99,6 @@ const MOCK_ROOMS = [
     name: 'Room 5, Standard Double',
     slug: 'room-5-standard-double',
     description: 'Featuring free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room has a wardrobe, an electric kettle, flat-screen TV, as well as chocolate for guests. The unit has 1 bed.',
-    capacity: 2,
-    price_per_night: 110.00,
-    bed_type: 'Double Bed',
-    room_size: 18,
-    has_ensuite_bathroom: true,
     images: [
       { image_url: 'http://localhost:8000/storage/rooms/room 5/room5.webp' },
       { image_url: 'http://localhost:8000/storage/rooms/room 5/room5_1.webp' },
@@ -143,11 +118,6 @@ const MOCK_ROOMS = [
     name: 'Room 6, Deluxe Double',
     slug: 'room-6-deluxe-double',
     description: 'Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
-    capacity: 2,
-    price_per_night: 135.00,
-    bed_type: 'Double Bed',
-    room_size: 21,
-    has_ensuite_bathroom: true,
     images: [
       { image_url: 'http://localhost:8000/storage/rooms/room 6/room6.webp' },
       { image_url: 'http://localhost:8000/storage/rooms/room 6/room6_1.webp' },
@@ -167,11 +137,6 @@ const MOCK_ROOMS = [
     name: 'Room 7, Small Single',
     slug: 'room-7-small-single',
     description: 'A TV, DVD player and tea/coffee making facilities are featured in this room.',
-    capacity: 1,
-    price_per_night: 80.00,
-    bed_type: 'Single Bed',
-    room_size: 12,
-    has_ensuite_bathroom: true,
     images: [
       { image_url: 'http://localhost:8000/storage/rooms/room 7/room7.webp' },
       { image_url: 'http://localhost:8000/storage/rooms/room 7/room7_1.webp' },
@@ -192,11 +157,6 @@ const MOCK_ROOMS = [
     name: 'Room 8, Deluxe Double',
     slug: 'room-8-deluxe-double',
     description: 'Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
-    capacity: 2,
-    price_per_night: 135.00,
-    bed_type: 'Double Bed',
-    room_size: 21,
-    has_ensuite_bathroom: true,
     images: [
       { image_url: 'http://localhost:8000/storage/rooms/room 8/room8.webp' },
       { image_url: 'http://localhost:8000/storage/rooms/room 8/room8_1.webp' },
@@ -217,11 +177,6 @@ const MOCK_ROOMS = [
     name: 'Room 9, Split Level Double',
     slug: 'room-9-split-level-double',
     description: 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
-    capacity: 2,
-    price_per_night: 145.00,
-    bed_type: 'Double Bed',
-    room_size: 25,
-    has_ensuite_bathroom: true,
     images: [
       { image_url: 'http://localhost:8000/storage/rooms/room 9/room9.webp' },
       { image_url: 'http://localhost:8000/storage/rooms/room 9/room9_1.webp' },
@@ -553,9 +508,6 @@ function RoomCard({ room }) {
     <div className="room-card">
       <div className="room-img-container">
         <img src={primaryImage} alt={room.name} className="room-img" />
-        <div className="room-price-tag">
-          From <span>£{room.price_per_night}</span>/night
-        </div>
       </div>
       <div className="room-details-preview">
         <Link to={`/rooms/${room.slug}`}>
@@ -563,16 +515,6 @@ function RoomCard({ room }) {
         </Link>
         <p className="room-card-description">{room.description}</p>
         
-        <div className="room-specs">
-          <div className="room-spec-item">
-            <Clock className="w-4 h-4 text-secondary" />
-            <span>Size: {room.room_size} m²</span>
-          </div>
-          <div className="room-spec-item">
-            <Bath className="w-4 h-4 text-secondary" />
-            <span>{room.has_ensuite_bathroom ? 'En-suite' : 'Shared Bath'}</span>
-          </div>
-        </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
           <Link to={`/rooms/${room.slug}`} className="btn btn-outline" style={{ padding: '10px 20px', fontSize: '13px' }}>
@@ -637,23 +579,9 @@ function RoomDetailsView({ rooms }) {
 
           {/* Details Column */}
           <div>
-            <span className="section-subtitle">£{room.price_per_night} / Night</span>
+            <span className="section-subtitle">Boutique Room</span>
             <h1 style={{ fontSize: '42px', marginBottom: '16px', fontFamily: 'var(--font-serif)' }}>{room.name}</h1>
             
-            <div className="room-specs" style={{ margin: '24px 0', paddingBottom: '24px' }}>
-              <div className="room-spec-item">
-                <Clock className="w-5 h-5 text-secondary" />
-                <span>Size: {room.room_size} m²</span>
-              </div>
-              <div className="room-spec-item">
-                <Bath className="w-5 h-5 text-secondary" />
-                <span>{room.has_ensuite_bathroom ? 'Private En-suite' : 'Shared Bath'}</span>
-              </div>
-              <div className="room-spec-item">
-                <Calendar className="w-5 h-5 text-secondary" />
-                <span>Bed: {room.bed_type}</span>
-              </div>
-            </div>
 
             <p style={{ color: 'var(--gray-600)', marginBottom: '32px', fontSize: '16px' }}>{room.description}</p>
             

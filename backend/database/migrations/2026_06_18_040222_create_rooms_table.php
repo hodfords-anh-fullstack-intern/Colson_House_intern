@@ -16,11 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description');
-            $table->integer('capacity');
-            $table->decimal('price_per_night', 8, 2);
-            $table->string('bed_type')->nullable();
-            $table->integer('room_size')->nullable(); // in square meters
-            $table->boolean('has_ensuite_bathroom')->default(true);
             $table->boolean('is_available')->default(true);
             $table->timestamps();
         });

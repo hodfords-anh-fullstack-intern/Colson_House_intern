@@ -7,6 +7,7 @@ use App\Models\Room;
 use App\Models\Amenity;
 use App\Models\RoomImage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class HotelSeeder extends Seeder
 {
@@ -15,142 +16,165 @@ class HotelSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Create Amenities
-        $amenityData = [
-            ['name' => 'Free High-Speed Wi-Fi', 'icon' => 'Wifi'],
-            ['name' => '5-Star Luxury Linen', 'icon' => 'Sparkles'],
-            ['name' => 'En-suite Bathroom', 'icon' => 'Bath'],
-            ['name' => 'Flat Screen Smart TV', 'icon' => 'Tv'],
-            ['name' => 'Complimentary Tea & Coffee', 'icon' => 'Coffee'],
-            ['name' => 'Hairdryer', 'icon' => 'Wind'],
-            ['name' => 'Cozy Heating', 'icon' => 'Flame'],
-            ['name' => 'Dedicated Workspace', 'icon' => 'Laptop'],
-        ];
+        // Truncate existing tables to avoid duplicate keys/errors
+        Room::truncate();
+        Amenity::truncate();
+        RoomImage::truncate();
+        \Illuminate\Support\Facades\DB::table('room_amenity')->truncate();
 
-        $amenities = [];
-        foreach ($amenityData as $data) {
-            $amenities[] = Amenity::create($data);
-        }
-
-        // 2. Create Rooms
-        $rooms = [
+        // 1. Raw Room Data (Only number, name, description, amenities_string)
+        $roomsData = [
             [
-                'name' => 'Deluxe Double Room',
-                'description' => 'A spacious and beautifully decorated room featuring a premium king-sized bed, high-quality 5-star linen, and a luxurious en-suite shower. Perfect for couples looking for comfort and style near Brighton Pier.',
-                'capacity' => 2,
-                'price_per_night' => 120.00,
-                'bed_type' => 'King Size',
-                'room_size' => 22,
-                'has_ensuite_bathroom' => true,
-                'images' => [
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_2064.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_2088.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_2074.jpg'
-                ],
-                'amenity_indexes' => [0, 1, 2, 3, 4, 5, 6]
+                'number' => 1,
+                'name' => 'Room 1, Deluxe Double Room',
+                'description' => 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV. The unit offers 1 bed.',
+                'amenities_string' => 'ALL bedrooms Non Smoking • ALL Rooms Non-Smoking • Broadband/High Speed Internet Access • Central Heating • Daily Housekeeping • Designer Toiletries • Egyptian Cotton Linen • Electric Shaver Point • En Suite • LCD/Plasma Television • Remote Control TV • Shower EnSuite • Tea/Coffee • TV In Room • Wash Hand Basin EnSuite • WC EnSuite • WI-FI Internet Access • Wifi Free • Windows open • Complimentary Toiletries • Digital Television Channels • Flat Screen TV • Fridge • Linen & Towels Supplied • Private Bathroom • Work Desk'
             ],
             [
-                'name' => 'Standard Twin Room',
-                'description' => 'Comfortable and inclusive room with two single beds, fresh high-quality linen, and an en-suite bathroom. Ideal for friends or family members traveling together in vibrant Kemp Town.',
-                'capacity' => 2,
-                'price_per_night' => 110.00,
-                'bed_type' => '2 Twin Single Beds',
-                'room_size' => 20,
-                'has_ensuite_bathroom' => true,
-                'images' => [
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1890-1.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1852-1.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1845-1.jpg'
-                ],
-                'amenity_indexes' => [0, 1, 2, 3, 4, 6]
+                'number' => 2,
+                'name' => 'Room 2, Four Poster Room',
+                'description' => 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers a four poster bed.',
+                'amenities_string' => 'ALL bedrooms Non Smoking • ALL Rooms Non-Smoking • Broadband/High Speed Internet Access • Central Heating • Complimentary Toiletries • Daily Housekeeping • Designer Toiletries • Digital Television Channels • Egyptian Cotton Linen • En Suite • Flat Screen TV • Four Poster Bed • Fridge • Private Bathroom • Shower EnSuite • Tea/Coffee • Television • TV In Room • Wash Hand Basin EnSuite • WC EnSuite • WI-FI Internet Access • Wifi Free • Windows open'
             ],
             [
-                'name' => 'Comfort Triple Room',
-                'description' => 'Spacious room accommodating up to three guests, featuring one double bed and one single bed. Complete with premium en-suite facilities, perfect for small groups looking for a beachside stroll.',
-                'capacity' => 3,
-                'price_per_night' => 150.00,
-                'bed_type' => '1 Double + 1 Single',
-                'room_size' => 26,
-                'has_ensuite_bathroom' => true,
-                'images' => [
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1990.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1985.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1986.jpg'
-                ],
-                'amenity_indexes' => [0, 1, 2, 3, 4, 5, 6]
+                'number' => 3,
+                'name' => 'Room 3, Standard Double',
+                'description' => 'Featuring free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room has a wardrobe, an electric kettle, flat-screen TV, as well as chocolate for guests. The unit has 1 bed.',
+                'amenities_string' => 'Central Heating • Daily Housekeeping • Egyptian Cotton Linen • Flat Screen TV • Fridge • Kettle • Private Bathroom • Shower EnSuite • Tea/Coffee • Television • TV In Room • Wash Hand Basin EnSuite • WC EnSuite • WI-FI Internet Access • Wifi Free • Windows open • Work Desk'
             ],
             [
-                'name' => 'Executive King Suite',
-                'description' => 'Our flagship room offering the ultimate Colson House experience. Boasts a massive king bed, custom modern furniture, writing desk, and a large en-suite bathroom with premium luxury amenities.',
-                'capacity' => 2,
-                'price_per_night' => 175.00,
-                'bed_type' => 'Super King Size',
-                'room_size' => 30,
-                'has_ensuite_bathroom' => true,
-                'images' => [
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1916.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1913.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1915.jpg'
-                ],
-                'amenity_indexes' => [0, 1, 2, 3, 4, 5, 6, 7]
+                'number' => 4,
+                'name' => 'Room 4, Deluxe Balcony Room',
+                'description' => 'This double room provides a fireplace. A seating area with a flat-screen TV, a desk, a balcony and a private bathroom are provided in this double room. The unit offers 1 bed.',
+                'amenities_string' => 'ALL bedrooms Non Smoking • ALL Rooms Non-Smoking • Balcony • Broadband/High Speed Internet Access • Central Heating • Complimentary Toiletries • Daily Housekeeping • Designer Toiletries • Egyptian Cotton Linen • Flat Screen TV • Fridge • Kettle • Linen & Towels Supplied • Private Bathroom • Remote Control TV • Shower EnSuite • Tea/Coffee • Television • TV In Room • Wash Hand Basin EnSuite • WC EnSuite • WI-FI Internet Access • Wifi Free • Windows open'
             ],
             [
-                'name' => 'Cosy Single Room',
-                'description' => 'Perfect for solo travelers and business individuals. Features a comfortable single bed, en-suite shower room, desk workspace, and high-speed Wi-Fi to keep you connected.',
-                'capacity' => 1,
-                'price_per_night' => 75.00,
-                'bed_type' => 'Single Bed',
-                'room_size' => 14,
-                'has_ensuite_bathroom' => true,
-                'images' => [
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1792.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1782.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1812.jpg'
-                ],
-                'amenity_indexes' => [0, 1, 2, 3, 4, 6, 7]
+                'number' => 5,
+                'name' => 'Room 5, Standard Double',
+                'description' => 'Featuring free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room has a wardrobe, an electric kettle, flat-screen TV, as well as chocolate for guests. The unit has 1 bed.',
+                'amenities_string' => 'ALL bedrooms Non Smoking • ALL Rooms Non-Smoking • Broadband/High Speed Internet Access • Complimentary Toiletries • Daily Housekeeping • Designer Toiletries • Digital Television Channels • Egyptian Cotton Linen • Flat Screen TV • Fridge • Kettle • Linen & Towels Supplied • Shower EnSuite • Tea/Coffee • Wash Hand Basin EnSuite • WI-FI Internet Access • Wifi Free • Windows open • Work Desk with Lamp'
             ],
             [
-                'name' => 'Superior Double Room',
-                'description' => 'A beautifully appointed room with a comfortable double bed, elegant decor, and full en-suite bathroom. Enjoy the historic atmosphere of Kemp Town right outside your window.',
-                'capacity' => 2,
-                'price_per_night' => 130.00,
-                'bed_type' => 'Double Bed',
-                'room_size' => 20,
-                'has_ensuite_bathroom' => true,
-                'images' => [
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1684.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1669.jpg',
-                    'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1687.jpg'
-                ],
-                'amenity_indexes' => [0, 1, 2, 3, 4, 5, 6]
+                'number' => 6,
+                'name' => 'Room 6, Deluxe Double',
+                'description' => 'Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
+                'amenities_string' => 'ALL bedrooms Non Smoking • ALL Rooms Non-Smoking • Broadband/High Speed Internet Access • Complimentary Toiletries • Daily Housekeeping • Designer Toiletries • Electric Shaver Point • En Suite • Flat Screen TV • Fridge • Kettle • Linen & Towels Supplied • Private Bathroom • Remote Control TV • Shower EnSuite • Tea/Coffee • Wash Hand Basin EnSuite • WC EnSuite • WI-FI Internet Access • Wifi Free • Windows open • Work Desk'
+            ],
+            [
+                'number' => 7,
+                'name' => 'Room 7, Small Single',
+                'description' => 'A TV, DVD player and tea/coffee making facilities are featured in this room.',
+                'amenities_string' => 'ALL bedrooms Non Smoking • ALL Rooms Non-Smoking • Broadband/High Speed Internet Access • Central Heating • Complimentary Toiletries • Daily Housekeeping • Designer Toiletries • Desk Chair • Egyptian Cotton Linen • Electric Shaver Point • En Suite • Heating Throughout Property • TV In Room • Wash Hand Basin EnSuite • WC EnSuite • WI-FI Internet Access • Wifi Free • Windows open • Work Desk'
+            ],
+            [
+                'number' => 8,
+                'name' => 'Room 8, Deluxe Double',
+                'description' => 'Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
+                'amenities_string' => 'ALL bedrooms Non Smoking • ALL Rooms Non-Smoking • Broadband/High Speed Internet Access • Central Heating • Complimentary Toiletries • Daily Housekeeping • Designer Toiletries • Egyptian Cotton Linen • Electric Shaver Point • En Suite • Flat Screen TV • Fridge • Kettle • Private Bathroom • Shower EnSuite • Tea/Coffee • TV In Room • Wash Hand Basin EnSuite • WC EnSuite • WI-FI Internet Access • Wifi Free • Windows open • Work Desk'
+            ],
+            [
+                'number' => 9,
+                'name' => 'Room 9, Split Level Double',
+                'description' => 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
+                'amenities_string' => 'ALL bedrooms Non Smoking • ALL Rooms Non-Smoking • Central Heating • Complimentary Toiletries • Daily Housekeeping • Designer Toiletries • Egyptian Cotton Linen • Electric Shaver Point • En Suite • Flat Screen TV • Fridge • Linen & Towels Supplied • Television • TV In Room • Wash Hand Basin EnSuite • WC EnSuite • WI-FI Internet Access • Wifi Free • Windows open • Work Desk'
             ]
         ];
 
-        foreach ($rooms as $r) {
-            $createdRoom = Room::create([
-                'name' => $r['name'],
-                'slug' => Str::slug($r['name']),
-                'description' => $r['description'],
-                'capacity' => $r['capacity'],
-                'price_per_night' => $r['price_per_night'],
-                'bed_type' => $r['bed_type'],
-                'room_size' => $r['room_size'],
-                'has_ensuite_bathroom' => $r['has_ensuite_bathroom'],
+        // 2. Parse and Create Unique Amenities
+        $allUniqueAmenities = [];
+        foreach ($roomsData as $rData) {
+            $amenityList = explode('•', $rData['amenities_string']);
+            foreach ($amenityList as $item) {
+                $name = trim($item);
+                if (!empty($name) && !in_array($name, $allUniqueAmenities)) {
+                    $allUniqueAmenities[] = $name;
+                }
+            }
+        }
+
+        // Map icons for display helper
+        $amenityModels = [];
+        foreach ($allUniqueAmenities as $amenityName) {
+            $icon = 'Check';
+            if (Str::contains($amenityName, ['Wi-Fi', 'WI-FI', 'Internet'])) {
+                $icon = 'Wifi';
+            } elseif (Str::contains($amenityName, ['Bathroom', 'En Suite', 'EnSuite', 'Shower', 'Bath'])) {
+                $icon = 'Bath';
+            } elseif (Str::contains($amenityName, ['TV', 'Television'])) {
+                $icon = 'Tv';
+            } elseif (Str::contains($amenityName, ['Tea', 'Coffee', 'Kettle'])) {
+                $icon = 'Coffee';
+            } elseif (Str::contains($amenityName, ['Hairdryer', 'Wind'])) {
+                $icon = 'Wind';
+            } elseif (Str::contains($amenityName, ['Heating'])) {
+                $icon = 'Flame';
+            } elseif (Str::contains($amenityName, ['Desk', 'Laptop'])) {
+                $icon = 'Laptop';
+            } elseif (Str::contains($amenityName, ['Toiletries', 'Linen', 'Supplied', 'Daily Housekeeping', 'Egyptian Cotton'])) {
+                $icon = 'Sparkles';
+            }
+
+            $amenityModels[$amenityName] = Amenity::create([
+                'name' => $amenityName,
+                'icon' => $icon
+            ]);
+        }
+
+        // 3. Create Rooms, Scan Directories for Local Images, and Link Amenities
+        foreach ($roomsData as $rData) {
+            $slug = Str::slug($rData['name']);
+            
+            // Create Room
+            $room = Room::create([
+                'name' => $rData['name'],
+                'slug' => $slug,
+                'description' => $rData['description'],
                 'is_available' => true,
             ]);
 
-            // Add Images
-            foreach ($r['images'] as $index => $imageUrl) {
+            // Scan directory for local WebP images
+            $folderName = ($rData['number'] === 2) ? 'room2' : 'room ' . $rData['number'];
+            $roomDirPath = storage_path('app/public/rooms/' . $folderName);
+            $imagePaths = [];
+
+            if (File::isDirectory($roomDirPath)) {
+                $files = File::files($roomDirPath);
+                foreach ($files as $file) {
+                    if (in_array(strtolower($file->getExtension()), ['webp', 'jpg', 'jpeg', 'png', 'avif'])) {
+                        // Store relative storage path: e.g., 'rooms/room 1/room1.webp'
+                        $imagePaths[] = 'rooms/' . $folderName . '/' . $file->getFilename();
+                    }
+                }
+            }
+
+            // Fallback default image if directory is empty
+            if (empty($imagePaths)) {
+                $imagePaths[] = 'rooms/placeholder.webp';
+            }
+
+            // Create RoomImage records
+            foreach ($imagePaths as $index => $path) {
+                // If it contains the primary file name, e.g. "room1.webp" vs "room1_1.webp"
+                $isPrimary = false;
+                $filename = basename($path);
+                if ($filename === "room" . $rData['number'] . ".webp" || $index === 0) {
+                    $isPrimary = true;
+                }
+
                 RoomImage::create([
-                    'room_id' => $createdRoom->id,
-                    'image_path' => $imageUrl,
-                    'is_primary' => $index === 0,
+                    'room_id' => $room->id,
+                    'image_path' => $path,
+                    'is_primary' => $isPrimary
                 ]);
             }
 
-            // Link Amenities
-            foreach ($r['amenity_indexes'] as $index) {
-                $createdRoom->amenities()->attach($amenities[$index]->id);
+            // Attach parsed amenities
+            $roomAmenities = explode('•', $rData['amenities_string']);
+            foreach ($roomAmenities as $aItem) {
+                $aName = trim($aItem);
+                if (!empty($aName) && isset($amenityModels[$aName])) {
+                    $room->amenities()->attach($amenityModels[$aName]->id);
+                }
             }
         }
     }
