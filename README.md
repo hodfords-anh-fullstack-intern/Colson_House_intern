@@ -8,7 +8,7 @@ This repository contains the local development environment for the **Colson Hote
 
 - **Backend**: Laravel 11+ (PHP 8.5)
 - **Frontend**: React 19 (Vite, Vanilla CSS)
-- **Database**: SQLite (local dev) / MySQL or PostgreSQL (staging/production)
+- **Database**: MySQL (local dev / staging / production) (SQLite is also supported)
 - **CORS Policy**: Configured to restrict origin requests dynamically based on the environment.
 - **Dependency Security**: Scanned and verified using `composer audit` and `npm audit`.
 
@@ -43,7 +43,7 @@ Follow these steps to set up and run the project locally on your machine.
 ### 📋 Prerequisites
 Make sure you have the following installed:
 - **Git**
-- **PHP 8.5+** (ensure SQLite extensions are enabled — see [Troubleshooting](#-troubleshooting) below)
+- **PHP 8.5+** (ensure `pdo_mysql` extension is enabled — see [Troubleshooting](#-troubleshooting) below if using SQLite)
 - **Composer 2.x**
 - **Node.js (v24+) & npm**
 
@@ -52,8 +52,8 @@ Make sure you have the following installed:
 ### Step 1: Clone the Repository
 Clone the project from GitHub and navigate to the project directory:
 ```bash
-git clone https://github.com/NguyenThiNgocAnh03/Colson_House.git
-cd Colson_House
+git clone https://github.com/hodfords-anh-fullstack-intern/Colson_House_intern.git
+cd Colson_House_intern
 ```
 
 ---
@@ -79,11 +79,9 @@ cd Colson_House
    ```bash
    php artisan key:generate
    ```
-5. Create the SQLite database file (if it does not exist) and run the database migrations:
-   - **Create SQLite file manually**:
-     - *Windows (CMD)*: `type nul > database/database.sqlite`
-     - *Windows (PowerShell)*: `New-Item -ItemType File -Path database/database.sqlite -Force`
-     - *macOS / Linux*: `touch database/database.sqlite`
+5. Create a MySQL database and run the database migrations:
+   - **Create Database**: Open your MySQL server (via phpMyAdmin, MySQL CLI, or XAMPP) and create a database named `colson_house`.
+   - **Configure `.env`**: Make sure the database credentials in `backend/.env` are correct (default host is `127.0.0.1`, port is `3306`, user is `root`, password is empty).
    - **Run migrations**:
      ```bash
      php artisan migrate
