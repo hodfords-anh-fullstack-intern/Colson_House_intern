@@ -5,7 +5,7 @@ import './styles/components/Footer.css';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Calendar, Menu, X, Compass, Star, ShieldCheck, MapPin, Phone, Mail } from 'lucide-react';
 
-import logoSvg from './assets/logo/Consol_Logo.svg';
+import logoSvg from './assets/logo/Consol_Logo.png';
 
 import { API_URL } from './config';
 import { MOCK_ROOMS } from './constants';
