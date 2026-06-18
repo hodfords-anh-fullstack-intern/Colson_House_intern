@@ -23,7 +23,7 @@ class Room extends Model
      */
     public function images(): HasMany
     {
-        return $this->hasMany(RoomImage::class);
+        return $this->hasMany(RoomImage::class)->orderBy('is_primary', 'desc')->orderBy('id', 'asc');
     }
 
     /**

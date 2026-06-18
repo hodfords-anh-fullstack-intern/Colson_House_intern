@@ -17,10 +17,12 @@ class HotelSeeder extends Seeder
     public function run(): void
     {
         // Truncate existing tables to avoid duplicate keys/errors
+        \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
         Room::truncate();
         Amenity::truncate();
         RoomImage::truncate();
         \Illuminate\Support\Facades\DB::table('room_amenity')->truncate();
+        \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
 
         // 1. Raw Room Data (Only number, name, description, amenities_string)
         $roomsData = [
@@ -152,14 +154,19 @@ class HotelSeeder extends Seeder
                 $imagePaths[] = 'rooms/placeholder.webp';
             }
 
+            // Ensure the main image (roomX.webp) is the first element in the array
+            $primaryFilename = "room" . $rData['number'] . ".webp";
+            usort($imagePaths, function ($a, $b) use ($primaryFilename) {
+                $baseA = basename($a);
+                $baseB = basename($b);
+                if ($baseA === $primaryFilename) return -1;
+                if ($baseB === $primaryFilename) return 1;
+                return strnatcasecmp($baseA, $baseB);
+            });
+
             // Create RoomImage records
             foreach ($imagePaths as $index => $path) {
-                // If it contains the primary file name, e.g. "room1.webp" vs "room1_1.webp"
-                $isPrimary = false;
-                $filename = basename($path);
-                if ($filename === "room" . $rData['number'] . ".webp" || $index === 0) {
-                    $isPrimary = true;
-                }
+                $isPrimary = ($index === 0);
 
                 RoomImage::create([
                     'room_id' => $room->id,
