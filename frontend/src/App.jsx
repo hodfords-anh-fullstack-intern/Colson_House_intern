@@ -5,8 +5,7 @@ import './styles/components/Footer.css';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Calendar, Menu, X, Compass, Star, ShieldCheck, MapPin, Phone, Mail } from 'lucide-react';
 
-import logoAvif from './assets/logo/Logo_Colson.avif';
-import logoSvg from './assets/logo/Logo_Colson.svg';
+import logoSvg from './assets/logo/Consol_Logo.svg';
 
 import { API_URL } from './config';
 import { MOCK_ROOMS } from './constants';
@@ -71,7 +70,6 @@ export default function App() {
         <div className="container header-inner">
           <Link to="/" className="logo-wrapper">
             <picture>
-              <source srcSet={logoAvif} type="image/avif" />
               <img src={logoSvg} alt="Colson House Logo" />
             </picture>
           </Link>
@@ -141,7 +139,6 @@ export default function App() {
           <div className="footer-grid">
             <div>
               <picture>
-                <source srcSet={logoAvif} type="image/avif" />
                 <img src={logoSvg} alt="Colson House Logo" className="footer-logo" />
               </picture>
               <p className="footer-text">
