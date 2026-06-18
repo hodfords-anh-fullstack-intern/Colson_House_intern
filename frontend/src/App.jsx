@@ -15,152 +15,227 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 const MOCK_ROOMS = [
   {
     id: 1,
-    name: 'Deluxe Double Room',
-    slug: 'deluxe-double-room',
-    description: 'A spacious and beautifully decorated room featuring a premium king-sized bed, high-quality 5-star linen, and a luxurious en-suite shower. Perfect for couples looking for comfort and style near Brighton Pier.',
+    name: 'Room 1, Deluxe Double Room',
+    slug: 'room-1-deluxe-double-room',
+    description: 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV. The unit offers 1 bed.',
     capacity: 2,
-    price_per_night: 120.00,
-    bed_type: 'King Size',
+    price_per_night: 140.00,
+    bed_type: 'Double Bed',
     room_size: 22,
     has_ensuite_bathroom: true,
     images: [
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_2064.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_2088.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_2074.jpg' }
+      { image_url: 'http://localhost:8000/storage/rooms/room 1/room1.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 1/room1_1.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 1/room1_2.webp' }
     ],
     amenities: [
-      { name: 'Free High-Speed Wi-Fi', icon: 'Wifi' },
-      { name: '5-Star Luxury Linen', icon: 'Sparkles' },
+      { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
+      { name: 'Central Heating', icon: 'Flame' },
       { name: 'En-suite Bathroom', icon: 'Bath' },
-      { name: 'Flat Screen Smart TV', icon: 'Tv' },
-      { name: 'Complimentary Tea & Coffee', icon: 'Coffee' },
+      { name: 'Flat Screen TV', icon: 'Tv' },
+      { name: 'Tea/Coffee Facilities', icon: 'Coffee' },
       { name: 'Hairdryer', icon: 'Wind' },
-      { name: 'Cozy Heating', icon: 'Flame' }
+      { name: 'Egyptian Cotton Linen', icon: 'Sparkles' },
+      { name: 'Work Desk', icon: 'Laptop' }
     ]
   },
   {
     id: 2,
-    name: 'Standard Twin Room',
-    slug: 'standard-twin-room',
-    description: 'Comfortable and inclusive room with two single beds, fresh high-quality linen, and an en-suite bathroom. Ideal for friends or family members traveling together in vibrant Kemp Town.',
+    name: 'Room 2, Four Poster Room',
+    slug: 'room-2-four-poster-room',
+    description: 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers a four poster bed.',
     capacity: 2,
-    price_per_night: 110.00,
-    bed_type: '2 Twin Single Beds',
-    room_size: 20,
+    price_per_night: 155.00,
+    bed_type: 'Four Poster Bed',
+    room_size: 24,
     has_ensuite_bathroom: true,
     images: [
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1890-1.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1852-1.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1845-1.jpg' }
+      { image_url: 'http://localhost:8000/storage/rooms/room2/room2.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room2/room2_1.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room2/room2_2.webp' }
     ],
     amenities: [
-      { name: 'Free High-Speed Wi-Fi', icon: 'Wifi' },
-      { name: '5-Star Luxury Linen', icon: 'Sparkles' },
+      { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
+      { name: 'Central Heating', icon: 'Flame' },
       { name: 'En-suite Bathroom', icon: 'Bath' },
-      { name: 'Flat Screen Smart TV', icon: 'Tv' },
-      { name: 'Complimentary Tea & Coffee', icon: 'Coffee' },
-      { name: 'Cozy Heating', icon: 'Flame' }
+      { name: 'Flat Screen TV', icon: 'Tv' },
+      { name: 'Tea/Coffee Facilities', icon: 'Coffee' },
+      { name: 'Egyptian Cotton Linen', icon: 'Sparkles' },
+      { name: 'Complimentary Toiletries', icon: 'Sparkles' }
     ]
   },
   {
     id: 3,
-    name: 'Comfort Triple Room',
-    slug: 'comfort-triple-room',
-    description: 'Spacious room accommodating up to three guests, featuring one double bed and one single bed. Complete with premium en-suite facilities, perfect for small groups looking for a beachside stroll.',
-    capacity: 3,
-    price_per_night: 150.00,
-    bed_type: '1 Double + 1 Single',
-    room_size: 26,
+    name: 'Room 3, Standard Double',
+    slug: 'room-3-standard-double',
+    description: 'Featuring free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room has a wardrobe, an electric kettle, flat-screen TV, as well as chocolate for guests. The unit has 1 bed.',
+    capacity: 2,
+    price_per_night: 110.00,
+    bed_type: 'Double Bed',
+    room_size: 18,
     has_ensuite_bathroom: true,
     images: [
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1990.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1985.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1986.jpg' }
+      { image_url: 'http://localhost:8000/storage/rooms/room 3/room3.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 3/room3_1.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 3/room3_2.webp' }
     ],
     amenities: [
-      { name: 'Free High-Speed Wi-Fi', icon: 'Wifi' },
-      { name: '5-Star Luxury Linen', icon: 'Sparkles' },
-      { name: 'En-suite Bathroom', icon: 'Bath' },
-      { name: 'Flat Screen Smart TV', icon: 'Tv' },
-      { name: 'Complimentary Tea & Coffee', icon: 'Coffee' },
-      { name: 'Hairdryer', icon: 'Wind' },
-      { name: 'Cozy Heating', icon: 'Flame' }
+      { name: 'Free Wi-Fi Internet Access', icon: 'Wifi' },
+      { name: 'Central Heating', icon: 'Flame' },
+      { name: 'Private Bathroom', icon: 'Bath' },
+      { name: 'Flat Screen TV', icon: 'Tv' },
+      { name: 'Electric Kettle / Tea & Coffee', icon: 'Coffee' },
+      { name: 'Egyptian Cotton Linen', icon: 'Sparkles' },
+      { name: 'Work Desk', icon: 'Laptop' }
     ]
   },
   {
     id: 4,
-    name: 'Executive King Suite',
-    slug: 'executive-king-suite',
-    description: 'Our flagship room offering the ultimate Colson House experience. Boasts a massive king bed, custom modern furniture, writing desk, and a large en-suite bathroom with premium luxury amenities.',
+    name: 'Room 4, Deluxe Balcony Room',
+    slug: 'room-4-deluxe-balcony-room',
+    description: 'This double room provides a fireplace. A seating area with a flat-screen TV, a desk, a balcony and a private bathroom are provided in this double room. The unit offers 1 bed.',
     capacity: 2,
-    price_per_night: 175.00,
-    bed_type: 'Super King Size',
-    room_size: 30,
+    price_per_night: 165.00,
+    bed_type: 'Double Bed',
+    room_size: 26,
     has_ensuite_bathroom: true,
     images: [
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1916.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1913.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1915.jpg' }
+      { image_url: 'http://localhost:8000/storage/rooms/room 4/room4.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 4/room4_1.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 4/room4_2.webp' }
     ],
     amenities: [
-      { name: 'Free High-Speed Wi-Fi', icon: 'Wifi' },
-      { name: '5-Star Luxury Linen', icon: 'Sparkles' },
-      { name: 'En-suite Bathroom', icon: 'Bath' },
-      { name: 'Flat Screen Smart TV', icon: 'Tv' },
-      { name: 'Complimentary Tea & Coffee', icon: 'Coffee' },
-      { name: 'Hairdryer', icon: 'Wind' },
-      { name: 'Cozy Heating', icon: 'Flame' },
-      { name: 'Dedicated Workspace', icon: 'Laptop' }
+      { name: 'Private Balcony', icon: 'Sparkles' },
+      { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
+      { name: 'Central Heating', icon: 'Flame' },
+      { name: 'Private Bathroom', icon: 'Bath' },
+      { name: 'Flat Screen TV', icon: 'Tv' },
+      { name: 'Electric Kettle / Tea & Coffee', icon: 'Coffee' },
+      { name: 'Egyptian Cotton Linen', icon: 'Sparkles' }
     ]
   },
   {
     id: 5,
-    name: 'Cosy Single Room',
-    slug: 'cosy-single-room',
-    description: 'Perfect for solo travelers and business individuals. Features a comfortable single bed, en-suite shower room, desk workspace, and high-speed Wi-Fi to keep you connected.',
-    capacity: 1,
-    price_per_night: 75.00,
-    bed_type: 'Single Bed',
-    room_size: 14,
+    name: 'Room 5, Standard Double',
+    slug: 'room-5-standard-double',
+    description: 'Featuring free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room has a wardrobe, an electric kettle, flat-screen TV, as well as chocolate for guests. The unit has 1 bed.',
+    capacity: 2,
+    price_per_night: 110.00,
+    bed_type: 'Double Bed',
+    room_size: 18,
     has_ensuite_bathroom: true,
     images: [
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1792.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1782.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1812.jpg' }
+      { image_url: 'http://localhost:8000/storage/rooms/room 5/room5.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 5/room5_1.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 5/room5_2.webp' }
     ],
     amenities: [
-      { name: 'Free High-Speed Wi-Fi', icon: 'Wifi' },
-      { name: '5-Star Luxury Linen', icon: 'Sparkles' },
-      { name: 'En-suite Bathroom', icon: 'Bath' },
-      { name: 'Flat Screen Smart TV', icon: 'Tv' },
-      { name: 'Complimentary Tea & Coffee', icon: 'Coffee' },
-      { name: 'Cozy Heating', icon: 'Flame' },
-      { name: 'Dedicated Workspace', icon: 'Laptop' }
+      { name: 'Free Wi-Fi Internet Access', icon: 'Wifi' },
+      { name: 'Private Bathroom with Shower', icon: 'Bath' },
+      { name: 'Flat Screen TV', icon: 'Tv' },
+      { name: 'Electric Kettle / Tea & Coffee', icon: 'Coffee' },
+      { name: 'Egyptian Cotton Linen', icon: 'Sparkles' },
+      { name: 'Work Desk with Lamp', icon: 'Laptop' }
     ]
   },
   {
     id: 6,
-    name: 'Superior Double Room',
-    slug: 'superior-double-room',
-    description: 'A beautifully appointed room with a comfortable double bed, elegant decor, and full en-suite bathroom. Enjoy the historic atmosphere of Kemp Town right outside your window.',
+    name: 'Room 6, Deluxe Double',
+    slug: 'room-6-deluxe-double',
+    description: 'Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
     capacity: 2,
-    price_per_night: 130.00,
+    price_per_night: 135.00,
     bed_type: 'Double Bed',
-    room_size: 20,
+    room_size: 21,
     has_ensuite_bathroom: true,
     images: [
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1684.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1669.jpg' },
-      { image_url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1687.jpg' }
+      { image_url: 'http://localhost:8000/storage/rooms/room 6/room6.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 6/room6_1.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 6/room6_2.webp' }
     ],
     amenities: [
-      { name: 'Free High-Speed Wi-Fi', icon: 'Wifi' },
-      { name: '5-Star Luxury Linen', icon: 'Sparkles' },
+      { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
+      { name: 'Private Bathroom with Shower', icon: 'Bath' },
+      { name: 'Flat Screen TV', icon: 'Tv' },
+      { name: 'Electric Kettle / Tea & Coffee', icon: 'Coffee' },
+      { name: 'Complimentary Toiletries', icon: 'Sparkles' },
+      { name: 'Work Desk', icon: 'Laptop' }
+    ]
+  },
+  {
+    id: 7,
+    name: 'Room 7, Small Single',
+    slug: 'room-7-small-single',
+    description: 'A TV, DVD player and tea/coffee making facilities are featured in this room.',
+    capacity: 1,
+    price_per_night: 80.00,
+    bed_type: 'Single Bed',
+    room_size: 12,
+    has_ensuite_bathroom: true,
+    images: [
+      { image_url: 'http://localhost:8000/storage/rooms/room 7/room7.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 7/room7_1.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 7/room7_2.webp' }
+    ],
+    amenities: [
+      { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
+      { name: 'Central Heating Throughout', icon: 'Flame' },
       { name: 'En-suite Bathroom', icon: 'Bath' },
-      { name: 'Flat Screen Smart TV', icon: 'Tv' },
-      { name: 'Complimentary Tea & Coffee', icon: 'Coffee' },
-      { name: 'Hairdryer', icon: 'Wind' },
-      { name: 'Cozy Heating', icon: 'Flame' }
+      { name: 'TV & DVD Player in Room', icon: 'Tv' },
+      { name: 'Tea & Coffee Facilities', icon: 'Coffee' },
+      { name: 'Egyptian Cotton Linen', icon: 'Sparkles' },
+      { name: 'Work Desk & Chair', icon: 'Laptop' }
+    ]
+  },
+  {
+    id: 8,
+    name: 'Room 8, Deluxe Double',
+    slug: 'room-8-deluxe-double',
+    description: 'Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
+    capacity: 2,
+    price_per_night: 135.00,
+    bed_type: 'Double Bed',
+    room_size: 21,
+    has_ensuite_bathroom: true,
+    images: [
+      { image_url: 'http://localhost:8000/storage/rooms/room 8/room8.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 8/room8_1.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 8/room8_2.webp' }
+    ],
+    amenities: [
+      { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
+      { name: 'Central Heating', icon: 'Flame' },
+      { name: 'En-suite Bathroom', icon: 'Bath' },
+      { name: 'Flat Screen TV', icon: 'Tv' },
+      { name: 'Electric Kettle / Tea & Coffee', icon: 'Coffee' },
+      { name: 'Designer Toiletries', icon: 'Sparkles' },
+      { name: 'Work Desk', icon: 'Laptop' }
+    ]
+  },
+  {
+    id: 9,
+    name: 'Room 9, Split Level Double',
+    slug: 'room-9-split-level-double',
+    description: 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
+    capacity: 2,
+    price_per_night: 145.00,
+    bed_type: 'Double Bed',
+    room_size: 25,
+    has_ensuite_bathroom: true,
+    images: [
+      { image_url: 'http://localhost:8000/storage/rooms/room 9/room9.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 9/room9_1.webp' },
+      { image_url: 'http://localhost:8000/storage/rooms/room 9/room9_2.webp' }
+    ],
+    amenities: [
+      { name: 'Cosy Fireplace Feature', icon: 'Flame' },
+      { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
+      { name: 'Central Heating', icon: 'Flame' },
+      { name: 'En-suite Bathroom', icon: 'Bath' },
+      { name: 'Flat Screen TV', icon: 'Tv' },
+      { name: 'Fridge & Kettle', icon: 'Coffee' },
+      { name: 'Linen & Towels Supplied', icon: 'Sparkles' },
+      { name: 'Work Desk', icon: 'Laptop' }
     ]
   }
 ];
