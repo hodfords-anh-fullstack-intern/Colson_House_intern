@@ -1,0 +1,405 @@
+/* Design System & Premium Aesthetics for Colson Hotel Dev Portal */
+
+.portal-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0f1015 0%, #1a1c24 50%, #15161c 100%);
+  color: #e2e8f0;
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Header styling */
+.portal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(15, 16, 21, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 24px;
+  filter: drop-shadow(0 0 8px #c084fc);
+}
+
+.brand-name {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(to right, #ffffff, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.env-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Main Layout */
+.portal-main {
+  flex-grow: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Welcome Section */
+.welcome-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.welcome-section h1 {
+  font-size: 48px;
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1.5px;
+}
+
+.welcome-subtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+/* Glassmorphism Cards */
+.glassmorphic {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glassmorphic:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 85, 247, 0.3);
+  box-shadow: 0 12px 40px 0 rgba(168, 85, 247, 0.1);
+}
+
+/* Status Cards Grid */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.status-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.success-border {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.error-border {
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 12px;
+}
+
+.card-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+}
+
+/* Badges */
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+}
+
+.badge.success {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge.warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge.danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge.info {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+/* Tech Info */
+.tech-stack {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.tech-logo {
+  height: 24px;
+  width: auto;
+}
+
+.tech-logo.spin {
+  animation: spin 12s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tech-icon {
+  font-size: 20px;
+}
+
+/* Lists and diagnostics */
+.details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.details-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+  padding-bottom: 6px;
+}
+
+.details-list li strong {
+  color: #94a3b8;
+}
+
+.status-details {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.status-msg {
+  margin: 0 0 6px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.text-muted {
+  color: #94a3b8;
+}
+
+.text-success {
+  color: #34d399;
+}
+
+.text-danger {
+  color: #f87171;
+}
+
+.status-timestamp {
+  margin: 0;
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* Buttons */
+.action-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+}
+
+.action-btn:hover:not(:disabled) {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.action-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.action-btn:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: #64748b;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Git tracking card */
+.git-details {
+  padding: 24px;
+  text-align: left;
+}
+
+.git-header h4 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.git-body p {
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.branch-visual {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.branch-node {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  border-left: 3px solid;
+}
+
+.branch-node.main {
+  border-left-color: #ef4444;
+}
+
+.branch-node.develop {
+  border-left-color: #3b82f6;
+}
+
+.branch-node.feature {
+  border-left-color: #a855f7;
+}
+
+.node-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.branch-node.main .node-dot { color: #ef4444; }
+.branch-node.develop .node-dot { color: #3b82f6; }
+.branch-node.feature .node-dot { color: #a855f7; }
+
+/* Footer styling */
+.portal-footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 13px;
+  color: #64748b;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(15, 16, 21, 0.4);
+}
+
+@media (max-width: 768px) {
+  .portal-header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+  }
+  .portal-main {
+    padding: 24px 16px;
+  }
+  .welcome-section h1 {
+    font-size: 32px;
+  }
+}
