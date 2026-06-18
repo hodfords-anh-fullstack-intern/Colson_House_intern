@@ -11,18 +11,23 @@ import logoSvg from './assets/logo/Logo_Colson.svg';
 // Custom API base URL
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
-// Fallback Mock Rooms Data (if backend MySQL is offline)
+// Helper to dynamically generate mock room images based on folders and counts
+const generateMockImages = (roomNum, maxCount) => {
+  const folder = roomNum === 2 ? 'room2' : `room ${roomNum}`;
+  const images = [{ image_url: `http://localhost:8000/storage/rooms/${folder}/room${roomNum}.webp`, is_primary: true }];
+  for (let i = 1; i <= maxCount; i++) {
+    images.push({ image_url: `http://localhost:8000/storage/rooms/${folder}/room${roomNum}_${i}.webp`, is_primary: false });
+  }
+  return images;
+};
+
 const MOCK_ROOMS = [
   {
     id: 1,
     name: 'Room 1, Deluxe Double Room',
     slug: 'room-1-deluxe-double-room',
     description: 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV. The unit offers 1 bed.',
-    images: [
-      { image_url: 'http://localhost:8000/storage/rooms/room 1/room1.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 1/room1_1.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 1/room1_2.webp' }
-    ],
+    images: generateMockImages(1, 9),
     amenities: [
       { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
       { name: 'Central Heating', icon: 'Flame' },
@@ -39,11 +44,7 @@ const MOCK_ROOMS = [
     name: 'Room 2, Four Poster Room',
     slug: 'room-2-four-poster-room',
     description: 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers a four poster bed.',
-    images: [
-      { image_url: 'http://localhost:8000/storage/rooms/room2/room2.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room2/room2_1.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room2/room2_2.webp' }
-    ],
+    images: generateMockImages(2, 12),
     amenities: [
       { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
       { name: 'Central Heating', icon: 'Flame' },
@@ -59,11 +60,7 @@ const MOCK_ROOMS = [
     name: 'Room 3, Standard Double',
     slug: 'room-3-standard-double',
     description: 'Featuring free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room has a wardrobe, an electric kettle, flat-screen TV, as well as chocolate for guests. The unit has 1 bed.',
-    images: [
-      { image_url: 'http://localhost:8000/storage/rooms/room 3/room3.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 3/room3_1.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 3/room3_2.webp' }
-    ],
+    images: generateMockImages(3, 18),
     amenities: [
       { name: 'Free Wi-Fi Internet Access', icon: 'Wifi' },
       { name: 'Central Heating', icon: 'Flame' },
@@ -79,11 +76,7 @@ const MOCK_ROOMS = [
     name: 'Room 4, Deluxe Balcony Room',
     slug: 'room-4-deluxe-balcony-room',
     description: 'This double room provides a fireplace. A seating area with a flat-screen TV, a desk, a balcony and a private bathroom are provided in this double room. The unit offers 1 bed.',
-    images: [
-      { image_url: 'http://localhost:8000/storage/rooms/room 4/room4.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 4/room4_1.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 4/room4_2.webp' }
-    ],
+    images: generateMockImages(4, 9),
     amenities: [
       { name: 'Private Balcony', icon: 'Sparkles' },
       { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
@@ -99,11 +92,7 @@ const MOCK_ROOMS = [
     name: 'Room 5, Standard Double',
     slug: 'room-5-standard-double',
     description: 'Featuring free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room has a wardrobe, an electric kettle, flat-screen TV, as well as chocolate for guests. The unit has 1 bed.',
-    images: [
-      { image_url: 'http://localhost:8000/storage/rooms/room 5/room5.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 5/room5_1.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 5/room5_2.webp' }
-    ],
+    images: generateMockImages(5, 15),
     amenities: [
       { name: 'Free Wi-Fi Internet Access', icon: 'Wifi' },
       { name: 'Private Bathroom with Shower', icon: 'Bath' },
@@ -118,11 +107,7 @@ const MOCK_ROOMS = [
     name: 'Room 6, Deluxe Double',
     slug: 'room-6-deluxe-double',
     description: 'Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
-    images: [
-      { image_url: 'http://localhost:8000/storage/rooms/room 6/room6.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 6/room6_1.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 6/room6_2.webp' }
-    ],
+    images: generateMockImages(6, 20),
     amenities: [
       { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
       { name: 'Private Bathroom with Shower', icon: 'Bath' },
@@ -137,11 +122,7 @@ const MOCK_ROOMS = [
     name: 'Room 7, Small Single',
     slug: 'room-7-small-single',
     description: 'A TV, DVD player and tea/coffee making facilities are featured in this room.',
-    images: [
-      { image_url: 'http://localhost:8000/storage/rooms/room 7/room7.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 7/room7_1.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 7/room7_2.webp' }
-    ],
+    images: generateMockImages(7, 5),
     amenities: [
       { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
       { name: 'Central Heating Throughout', icon: 'Flame' },
@@ -157,11 +138,7 @@ const MOCK_ROOMS = [
     name: 'Room 8, Deluxe Double',
     slug: 'room-8-deluxe-double',
     description: 'Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
-    images: [
-      { image_url: 'http://localhost:8000/storage/rooms/room 8/room8.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 8/room8_1.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 8/room8_2.webp' }
-    ],
+    images: generateMockImages(8, 11),
     amenities: [
       { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
       { name: 'Central Heating', icon: 'Flame' },
@@ -177,11 +154,7 @@ const MOCK_ROOMS = [
     name: 'Room 9, Split Level Double',
     slug: 'room-9-split-level-double',
     description: 'Guests will have a special experience as this double room offers a fireplace. Offering free toiletries, this double room includes a private bathroom with a shower and a hairdryer. This double room features a seating area, a wardrobe, flat-screen TV, as well as chocolate for guests. The unit offers 1 bed.',
-    images: [
-      { image_url: 'http://localhost:8000/storage/rooms/room 9/room9.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 9/room9_1.webp' },
-      { image_url: 'http://localhost:8000/storage/rooms/room 9/room9_2.webp' }
-    ],
+    images: generateMockImages(9, 14),
     amenities: [
       { name: 'Cosy Fireplace Feature', icon: 'Flame' },
       { name: 'Broadband/High Speed Internet Access', icon: 'Wifi' },
