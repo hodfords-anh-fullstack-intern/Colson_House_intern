@@ -1,9 +1,9 @@
 // Helper to dynamically generate mock room images based on folders and counts
 const generateMockImages = (roomNum, maxCount) => {
   const folder = roomNum === 2 ? 'room2' : `room ${roomNum}`;
-  const images = [{ image_url: `http://localhost:8000/storage/rooms/${folder}/room${roomNum}.webp`, is_primary: true }];
+  const images = [{ image_url: `/rooms/${folder}/room${roomNum}.webp`, is_primary: true }];
   for (let i = 1; i <= maxCount; i++) {
-    images.push({ image_url: `http://localhost:8000/storage/rooms/${folder}/room${roomNum}_${i}.webp`, is_primary: false });
+    images.push({ image_url: `/rooms/${folder}/room${roomNum}_${i}.webp`, is_primary: false });
   }
   return images;
 };
