@@ -86,7 +86,11 @@ cd Colson_House_intern
      ```bash
      php artisan migrate
      ```
-6. Start the local development server:
+6. Create the storage symbolic link (crucial for room images display):
+   ```bash
+   php artisan storage:link
+   ```
+7. Start the local development server:
    ```bash
    php artisan serve
    ```
@@ -164,24 +168,38 @@ git push origin feature/name-of-your-feature
 
 ## 🛠 Troubleshooting
 
-### 1. Error: `could not find driver` during migrations
-This occurs because the PHP SQLite extension is not enabled in your local PHP configuration (`php.ini`).
+### 1. Error: `could not find driver` during migrations (MySQL)
+This occurs because the PHP MySQL extension is not enabled in your local PHP configuration (`php.ini`).
 
 #### How to fix:
 1. Locate your active `php.ini` file.
    - If using **XAMPP**, it is usually at `C:\xampp\php\php.ini`.
 2. Open `php.ini` in a text editor (e.g., Notepad, VS Code).
-3. Search for the following lines (use `Ctrl+F`):
+3. Search for the following line (use `Ctrl+F`):
    ```ini
-   ;extension=pdo_sqlite
-   ;extension=sqlite3
+   ;extension=pdo_mysql
    ```
-4. Enable them by removing the semicolon `;` at the beginning of each line:
+4. Enable it by removing the semicolon `;` at the beginning of the line:
    ```ini
-   extension=pdo_sqlite
-   extension=sqlite3
+   extension=pdo_mysql
    ```
-5. Save the file and restart your terminal.
+5. Save the file and restart your Apache web server in XAMPP.
+
+### 2. AVIF / Image Processing Support (GD Extension)
+For the backend to convert uploaded room images into `.avif` format automatically, the PHP GD library must be enabled.
+
+#### How to fix:
+1. Open your `php.ini` file (`C:\xampp\php\php.ini` for XAMPP).
+2. Search for the following line:
+   ```ini
+   ;extension=gd
+   ```
+3. Enable it by removing the semicolon `;`:
+   ```ini
+   extension=gd
+   ```
+4. Save the file and **restart your Apache server** in XAMPP.
+5. Verification: Run `php -r "var_dump(function_exists('imageavif'));"` in the terminal. It should return `bool(true)`.
 
 ---
 
