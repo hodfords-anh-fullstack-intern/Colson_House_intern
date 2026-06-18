@@ -79,10 +79,15 @@ cd Colson_House
    ```bash
    php artisan key:generate
    ```
-5. Run the database migrations (this initializes the local SQLite database):
-   ```bash
-   php artisan migrate
-   ```
+5. Create the SQLite database file (if it does not exist) and run the database migrations:
+   - **Create SQLite file manually**:
+     - *Windows (CMD)*: `type nul > database/database.sqlite`
+     - *Windows (PowerShell)*: `New-Item -ItemType File -Path database/database.sqlite -Force`
+     - *macOS / Linux*: `touch database/database.sqlite`
+   - **Run migrations**:
+     ```bash
+     php artisan migrate
+     ```
 6. Start the local development server:
    ```bash
    php artisan serve
