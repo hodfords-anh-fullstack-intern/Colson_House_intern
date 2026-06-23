@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './styles/components/Button.css';
 import './styles/components/Header.css';
 import './styles/components/Footer.css';
-import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Calendar, Menu, X, Compass, Star, ShieldCheck, MapPin, Phone, Mail } from 'lucide-react';
 
 import logoSvg from './assets/logo/Consol_Logo.png';
 
 import { API_URL } from './config';
 import { MOCK_ROOMS } from './constants';
+import { openBooking } from './utils/booking';
 import ScrollToTop from './components/ScrollToTop';
 import NavLink from './components/NavLink';
 
@@ -21,15 +22,10 @@ import BookView from './pages/BookView';
 import ContactView from './pages/ContactView';
 import PrivacyPolicyView from './pages/PrivacyPolicyView';
 import TermsView from './pages/TermsView';
-import BookingModal from './components/BookingModal';
-
 export default function App() {
   const [rooms, setRooms] = useState(MOCK_ROOMS);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [showBooking, setShowBooking] = useState(false);
-  const BOOKING_URL = 'https://booking-directly.com/widgets/2FtcovmkVyAu40RKQAmygormLwDtQaaiPqUPvmBAmAEMHQRdo3lLtMhkIBSWY/properties';
-  const openBooking = () => window.open(BOOKING_URL, '_blank', 'noopener,noreferrer');
 
   // Monitor scroll for header styling
   useEffect(() => {

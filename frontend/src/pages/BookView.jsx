@@ -2,8 +2,7 @@ import React from 'react';
 import { Calendar, Phone, Mail } from 'lucide-react';
 import '../styles/pages/Book.css';
 
-const BOOKING_URL = 'https://booking-directly.com/widgets/2FtcovmkVyAu40RKQAmygormLwDtQaaiPqUPvmBAmAEMHQRdo3lLtMhkIBSWY/properties';
-const openBooking = () => window.open(BOOKING_URL, '_blank', 'noopener,noreferrer');
+import { openBooking } from '../utils/booking';
 
 export default function BookView() {
 

@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Phone, Mail, Calendar, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react';
 import AmenityIcon from '../components/AmenityIcon';
+import { openBooking } from '../utils/booking';
 import '../styles/pages/RoomDetails.css';
 
 const DESC_LIMIT = 180;
 const AMENITY_LIMIT = 8;
-const BOOKING_URL = 'https://booking-directly.com/widgets/2FtcovmkVyAu40RKQAmygormLwDtQaaiPqUPvmBAmAEMHQRdo3lLtMhkIBSWY/properties';
-const openBooking = () => window.open(BOOKING_URL, '_blank', 'noopener,noreferrer');
 
 export default function RoomDetailsView({ rooms }) {
   const { slug } = useParams();
