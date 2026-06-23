@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import '../styles/pages/Home.css';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, ChevronLeft } from 'lucide-react';
-import RoomCard from '../components/RoomCard';
 import { MOCK_ROOMS } from '../constants';
 
 const HERO_SLIDES = [
@@ -159,30 +158,6 @@ export default function HomeView({ rooms }) {
         </div>
       </section>
 
-      {/* Featured Rooms Section */}
-      <section className="section">
-        <div className="container">
-          <div className="section-header text-center">
-            <span className="section-subtitle">Luxury Stay</span>
-            <h2 className="section-title">Our Boutique Rooms</h2>
-            <p style={{ color: 'var(--gray-600)' }}>
-              Explore our boutique rooms named after movie stars of the 30s, 40s, and 50s.
-            </p>
-          </div>
-
-          <div className="grid rooms-grid">
-            {rooms.slice(0, 3).map(room => (
-              <RoomCard key={room.id} room={room} />
-            ))}
-          </div>
-
-          <div className="text-center" style={{ marginTop: '48px' }}>
-            <Link to="/rooms" className="btn btn-outline">
-              View All Rooms <ChevronRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
