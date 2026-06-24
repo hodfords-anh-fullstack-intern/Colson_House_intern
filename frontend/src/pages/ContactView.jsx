@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import '../styles/pages/Contact.css';
+import { Helmet } from 'react-helmet-async';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
 import { API_URL } from '../config';
+import { useSearchParams } from 'react-router-dom';
 
 export default function ContactView() {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [searchParams] = useSearchParams();
+  const isParking = searchParams.get('type') === 'parking';
+
+  const [formData, setFormData] = useState({
+    name: '', email: '',
+    subject: isParking ? 'Parking Request' : '',
+    message: '',
+    parkingFrom: '',
+    parkingTo: '',
+  });
   const [status, setStatus] = useState({ type: '', text: '' });
   const [loading, setLoading] = useState(false);
 
@@ -13,17 +24,26 @@ export default function ContactView() {
     setLoading(true);
     setStatus({ type: '', text: '' });
 
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      subject: formData.subject,
+      message: isParking && formData.parkingFrom && formData.parkingTo
+        ? `Parking dates: ${formData.parkingFrom} → ${formData.parkingTo}\n\n${formData.message}`
+        : formData.message,
+    };
+
     try {
       const response = await fetch(`${API_URL}/contacts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
       const data = await response.json();
 
       if (response.ok) {
         setStatus({ type: 'success', text: data.message || 'Message sent successfully!' });
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', subject: isParking ? 'Parking Request' : '', message: '', parkingFrom: '', parkingTo: '' });
       } else {
         setStatus({ type: 'error', text: data.errors ? Object.values(data.errors).flat().join(' ') : 'Failed to send message.' });
       }
@@ -31,11 +51,11 @@ export default function ContactView() {
       console.warn('API error, using offline simulation mode.');
       // Local Simulation Mode
       setTimeout(() => {
-        setStatus({ 
-          type: 'success', 
-          text: 'Thank you! Your message has been sent successfully (Simulated mode).' 
+        setStatus({
+          type: 'success',
+          text: 'Thank you! Your message has been sent successfully (Simulated mode).'
         });
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', subject: isParking ? 'Parking Request' : '', message: '', parkingFrom: '', parkingTo: '' });
       }, 1000);
     } finally {
       setLoading(false);
@@ -43,12 +63,21 @@ export default function ContactView() {
   };
 
   return (
+    <>
+    <Helmet>
+      <title>Contact Us | Colson House Brighton</title>
+      <meta name="description" content="Get in touch with Colson House, Brighton. Call, email or send a message — we are happy to help with bookings, room queries and local tips." />
+    </Helmet>
     <section className="section">
       <div className="container">
         <div className="section-header text-center">
-          <span className="section-subtitle">Get in Touch</span>
-          <h2 className="section-title">Contact Colson House</h2>
-          <p style={{ color: 'var(--gray-600)' }}>Have a question about a room or planning your Brighton trip? We are here to help.</p>
+          <span className="section-subtitle">{isParking ? 'Parking Add-On' : 'Get in Touch'}</span>
+          <h2 className="section-title">{isParking ? 'Request a Parking Space' : 'Contact Colson House'}</h2>
+          <p style={{ color: 'var(--gray-600)' }}>
+            {isParking
+              ? 'Reserve a private parking space next to Colson House for £25 per day. Fill in your dates and we will confirm availability.'
+              : 'Have a question about a room or planning your Brighton trip? We are here to help.'}
+          </p>
         </div>
 
         <div className="grid contact-grid">
@@ -119,13 +148,39 @@ export default function ContactView() {
               </div>
               <div className="form-group">
                 <label className="form-label">Subject (Optional)</label>
-                <input 
-                  type="text" 
-                  className="form-input" 
+                <input
+                  type="text"
+                  className="form-input"
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                 />
               </div>
+              {isParking && (
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">Arrival Date</label>
+                    <input
+                      type="date"
+                      className="form-input"
+                      value={formData.parkingFrom}
+                      min={new Date().toISOString().split('T')[0]}
+                      onChange={(e) => setFormData({ ...formData, parkingFrom: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Departure Date</label>
+                    <input
+                      type="date"
+                      className="form-input"
+                      value={formData.parkingTo}
+                      min={formData.parkingFrom || new Date().toISOString().split('T')[0]}
+                      onChange={(e) => setFormData({ ...formData, parkingTo: e.target.value })}
+                      required
+                    />
+                  </div>
+                </div>
+              )}
               <div className="form-group">
                 <label className="form-label">Message</label>
                 <textarea 
@@ -143,5 +198,6 @@ export default function ContactView() {
         </div>
       </div>
     </section>
+    </>
   );
 }

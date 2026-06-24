@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/pages/Home.css';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowRight, ChevronRight, ChevronLeft } from 'lucide-react';
 import { MOCK_ROOMS } from '../constants';
 
 const HERO_SLIDES = [
   {
-    url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_2064.jpg',
+    url: '/rooms/room 1/room1.webp',
     caption: 'Boutique Guest House • Brighton',
   },
   {
-    url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1916.jpg',
+    url: '/rooms/room2/room2.webp',
     caption: 'Victorian Elegance & Seaside Charm',
   },
   {
-    url: 'https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_2066.jpg',
+    url: '/rooms/room 3/room3.webp',
     caption: 'Movie-Star Themed Boutique Rooms',
   },
   ...MOCK_ROOMS.map(room => ({
@@ -38,6 +39,10 @@ export default function HomeView({ rooms }) {
 
   return (
     <div>
+      <Helmet>
+        <title>Colson House | Boutique Guest House Brighton</title>
+        <meta name="description" content="Stay at Colson House, a charming Victorian boutique guest house in Kemp Town, Brighton. En-suite rooms, 5-star linen, steps from Brighton Pier." />
+      </Helmet>
       {/* Hero Slider Section */}
       <section className="hero" style={{ position: 'relative', overflow: 'hidden' }}>
         {HERO_SLIDES.map((slide, i) => (
@@ -141,7 +146,7 @@ export default function HomeView({ rooms }) {
           </div>
           <div style={{ position: 'relative' }}>
             <img
-              src="https://colson.hodfords.net/wp-content/uploads/2021/06/IMG_1916.jpg"
+              src="/rooms/room2/room2.webp"
               alt="Boutique Room Setup"
               style={{ width: '100%', borderRadius: 'var(--border-radius)', boxShadow: 'var(--shadow-lg)', objectFit: 'cover', height: '450px' }}
             />

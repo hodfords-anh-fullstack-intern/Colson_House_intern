@@ -3,6 +3,7 @@ import './styles/components/Button.css';
 import './styles/components/Header.css';
 import './styles/components/Footer.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { Calendar, Menu, X, Compass, Star, ShieldCheck, MapPin, Phone, Mail } from 'lucide-react';
 
 import logoSvg from './assets/logo/Consol_Logo.png';
@@ -58,6 +59,7 @@ export default function App() {
   }, []);
 
   return (
+    <HelmetProvider>
     <Router>
       <ScrollToTop />
       
@@ -187,5 +189,6 @@ export default function App() {
       </footer>
 
     </Router>
+    </HelmetProvider>
   );
 }

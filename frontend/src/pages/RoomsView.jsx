@@ -1,8 +1,14 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import RoomCard from '../components/RoomCard';
 
 export default function RoomsView({ rooms }) {
   return (
+    <>
+    <Helmet>
+      <title>Rooms | Colson House Brighton</title>
+      <meta name="description" content="Explore our movie-star themed boutique rooms at Colson House, Brighton. All rooms include en-suite bathrooms and 5-star linen." />
+    </Helmet>
     <section className="section">
       <div className="container">
         <div className="section-header text-center">
@@ -20,5 +26,6 @@ export default function RoomsView({ rooms }) {
         </div>
       </div>
     </section>
+    </>
   );
 }

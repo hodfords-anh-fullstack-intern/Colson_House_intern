@@ -1,8 +1,14 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { MapPin } from 'lucide-react';
 
 export default function LocationView() {
   return (
+    <>
+    <Helmet>
+      <title>Location & Attractions | Colson House Brighton</title>
+      <meta name="description" content="Colson House is located in Kemp Town, Brighton — steps from Brighton Pier, the Royal Pavilion, and the best shops, pubs and restaurants." />
+    </Helmet>
     <section className="section">
       <div className="container">
         <div className="section-header text-center">
@@ -63,5 +69,6 @@ export default function LocationView() {
         </div>
       </div>
     </section>
+    </>
   );
 }

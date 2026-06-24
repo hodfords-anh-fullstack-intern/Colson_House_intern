@@ -1,7 +1,13 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 export default function ReviewsView() {
   return (
+    <>
+    <Helmet>
+      <title>Guest Reviews | Colson House Brighton</title>
+      <meta name="description" content="Read what guests say about staying at Colson House, Brighton. Rated highly for comfort, location, and warm hospitality in Kemp Town." />
+    </Helmet>
     <section className="section">
       <div className="container">
         <div className="section-header text-center">
@@ -23,5 +29,6 @@ export default function ReviewsView() {
         </div>
       </div>
     </section>
+    </>
   );
 }
